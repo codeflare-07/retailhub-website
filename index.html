@@ -1633,16 +1633,7 @@ window.addEventListener('scroll', () => {
 const downloadLink = document.querySelector('.download-option');
 
 if (downloadLink) {
-    downloadLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const originalText = downloadLink.textContent;
-        downloadLink.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8 10 1 17"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg><span>Download Started...</span>';
-        
-        setTimeout(() => {
-            downloadLink.innerHTML = originalText;
-        }, 3000);
-        
+    downloadLink.addEventListener('click', () => {
         setTimeout(closeModal, 1000);
     });
 }
