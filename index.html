@@ -481,8 +481,8 @@ html.dark .hero-background {
 }
 
 .feature-icon {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 10px;
     display: flex;
@@ -492,15 +492,29 @@ html.dark .hero-background {
     color: white;
 }
 
+.feature-icon:has(img) {
+    background: white;
+    border-radius: 12px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
 .feature-icon svg {
     width: 28px;
     height: 28px;
 }
 
-.feature-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
+.feature-icon img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.feature-image {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    display: block;
 }
 
 .feature-card p {
@@ -697,8 +711,40 @@ html.dark .hero-background {
     height: 36px;
 }
 
+.contact-image {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin:auto;
+    display: block;
+}
+
+.whatsapp-icon img {
+    background: transparent;
+}
+
+.email-icon,
+.whatsapp-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border-radius: 16px;
+}
+
 .email-icon {
     background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.whatsapp-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.email-icon {
+    background: transparent;
+    box-shadow: none;
 }
 
 .whatsapp-icon {
@@ -999,6 +1045,16 @@ html.dark .hero-background {
         padding: 1.5rem;
     }
 
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .feature-image {
+        width: 32px;
+        height: 32px;
+    }
+
     .download-card {
         padding: 30px 15px;
     }
@@ -1175,10 +1231,7 @@ html {
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                        </svg>
+                        <img src="assets/Billing.png" alt="Billing" class="feature-image">
                     </div>
                     <h3>Billing</h3>
                     <p>Create invoices, manage payments, and track transactions with ease</p>
@@ -1186,11 +1239,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
+                        <img src="assets/inventory.png" alt="Inventory Management" class="feature-image">
                     </div>
                     <h3>Inventory Management</h3>
                     <p>Track stock levels, manage SKUs, and optimize inventory in real-time</p>
@@ -1198,12 +1247,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
-                            <line x1="12" y1="12" x2="20" y2="7.5"></line>
-                            <line x1="12" y1="12" x2="12" y2="21"></line>
-                            <line x1="12" y1="12" x2="4" y2="7.5"></line>
-                        </svg>
+                        <img src="assets/Stock in out.png" alt="Stock In/Out" class="feature-image">
                     </div>
                     <h3>Stock In/Out</h3>
                     <p>Manage inbound and outbound stock movements seamlessly</p>
@@ -1211,14 +1255,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 12h18"></path>
-                            <path d="M3 6h18"></path>
-                            <path d="M3 18h18"></path>
-                            <path d="M5 9v6"></path>
-                            <path d="M7 8v8"></path>
-                            <path d="M9 7v10"></path>
-                        </svg>
+                        <img src="assets/Expenses.png" alt="Expenses" class="feature-image">
                     </div>
                     <h3>Expenses</h3>
                     <p>Track and categorize all business expenses with detailed reports</p>
@@ -1226,12 +1263,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
-                            <polyline points="12 12 20 7.5"></polyline>
-                            <polyline points="12 12 12 21"></polyline>
-                            <polyline points="12 12 4 7.5"></polyline>
-                        </svg>
+                        <img src="assets/Reports.png" alt="Reports" class="feature-image">
                     </div>
                     <h3>Reports</h3>
                     <p>Generate comprehensive reports to analyze business performance</p>
@@ -1239,10 +1271,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                            <circle cx="12" cy="13" r="4"></circle>
-                        </svg>
+                        <img src="assets/Google_Drive.png" alt="Google Drive Backup" class="feature-image">
                     </div>
                     <h3>Google Drive Backup</h3>
                     <p>Automatic backups to Google Drive for data safety and accessibility</p>
@@ -1250,10 +1279,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                            <circle cx="12" cy="13" r="4"></circle>
-                        </svg>
+                        <img src="assets/backup.png" alt="Auto Backup" class="feature-image">
                     </div>
                     <h3>Auto Backup</h3>
                     <p>Never lose data with automatic local and cloud backups</p>
@@ -1261,11 +1287,7 @@ html {
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="23 4 23 10 17 10"></polyline>
-                            <polyline points="1 20 1 14 7 14"></polyline>
-                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36M20.49 15a9 9 0 0 1-14.85 3.36"></path>
-                        </svg>
+                        <img src="assets/updated.png" alt="Auto Updates" class="feature-image">
                     </div>
                     <h3>Auto Updates</h3>
                     <p>Stay up-to-date with automatic software updates and improvements</p>
@@ -1361,22 +1383,19 @@ html {
                 <h2>Get in Touch</h2>
                 <p>We're here to help you succeed</p>
             </div>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon email-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                        </svg>
+            <div class="contact-card">
+
+                <div class="contain-icon email-icon">
+                    <img src="assets/mail.png" alt="Email" class="contact-image">
                     </div>
+
                     <h3>Email</h3>
-                    <a href="mailto:codeflare22@gmail.com" class="contact-link">codeflare22@gmail.com</a>
+                    <a href="mailto:codeflare22@gmail.com" class="contact-link">codeflare22@gmail.com
+                    </a>
                 </div>
                 <div class="contact-card">
                     <div class="contact-icon whatsapp-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
+                        <img src="assets/whatsapp.png" alt="WhatsApp" class="contact-image">
                     </div>
                     <h3>WhatsApp</h3>
                     <a href="https://wa.me/919592990709" class="contact-link" target="_blank" rel="noopener noreferrer">+91 9592990709</a>
