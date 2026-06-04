@@ -4,1185 +4,1073 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RetailHub - Complete Retail Management Software</title>
-    <meta name="description" content="Inventory, Billing, Expenses, Reports, Cloud Backup and Auto Updates in one application.">
+    <meta name="description" content="Inventory, Billing, Expenses, Reports, Cloud Backup and Auto Updates in one application. Ready for Windows.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-/* ==========================================
-   CSS Variables & Theme
-   ========================================== */
-:root {
-    --primary: #667eea;
-    --primary-dark: #5a67d8;
-    --secondary: #764ba2;
-    --accent: #ff6b6b;
-    --success: #10b981;
-    
-    --bg-light: #ffffff;
-    --bg-light-secondary: #f9fafb;
-    --text-light: #1f2937;
-    --text-light-secondary: #6b7280;
-    --border-light: #e5e7eb;
-    
-    --bg-dark: #0f172a;
-    --bg-dark-secondary: #1e293b;
-    --text-dark: #f1f5f9;
-    --text-dark-secondary: #cbd5e1;
-    --border-dark: #334155;
-    
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.15);
-    
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Light Mode */
-html:not(.dark) {
-    --bg: var(--bg-light);
-    --bg-secondary: var(--bg-light-secondary);
-    --text: var(--text-light);
-    --text-secondary: var(--text-light-secondary);
-    --border: var(--border-light);
-}
-
-/* Dark Mode */
-html.dark {
-    --bg: var(--bg-dark);
-    --bg-secondary: var(--bg-dark-secondary);
-    --text: var(--text-dark);
-    --text-secondary: var(--text-dark-secondary);
-    --border: var(--border-dark);
-}
-
-/* ==========================================
-   Global Styles
-   ========================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    transition: var(--transition);
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    font-family: inherit;
-    background: none;
-}
-
-/* ==========================================
-   Container & Layout
-   ========================================== */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-section {
-    position: relative;
-    overflow: hidden;
-}
-
-/* ==========================================
-   Navigation
-   ========================================== */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-html.dark .navbar {
-    background-color: rgba(15, 23, 42, 0.8);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.nav-logo svg {
-    width: 28px;
-    height: 28px;
-    color: var(--primary);
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.btn-nav-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.25rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    transition: var(--transition);
-    border: none;
-    cursor: pointer;
-}
-
-.btn-nav-download:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-}
-
-.btn-nav-download svg {
-    width: 18px;
-    height: 18px;
-}
-
-.theme-toggle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--bg-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.theme-toggle:hover {
-    background-color: var(--border);
-}
-
-.theme-toggle svg {
-    width: 20px;
-    height: 20px;
-    color: var(--text);
-}
-
-.moon-icon {
-    display: none;
-}
-
-html.dark .moon-icon {
-    display: block;
-}
-
-html.dark .sun-icon {
-    display: none;
-}
-
-/* ==========================================
-   Hero Section - Enhanced
-   ========================================== */
-.hero {
-    position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    padding: 60px 0;
-    overflow: hidden;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
-    z-index: 0;
-}
-
-.gradient-blur-1,
-.gradient-blur-2 {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.6;
-}
-
-.gradient-blur-1 {
-    width: 500px;
-    height: 500px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    top: -100px;
-    right: -100px;
-}
-
-.gradient-blur-2 {
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, #764ba2, #667eea);
-    bottom: -50px;
-    left: -100px;
-}
-
-html.dark .hero-background {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-}
-
-.hero-container {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.hero-content {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.hero-title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: var(--text);
-}
-
-.hero-subtitle {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    margin-bottom: 2.5rem;
-    line-height: 1.8;
-    max-width: 550px;
-}
-
-.hero-cta-text {
-    margin-top: 1rem;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-}
-
-.btn-download-hero {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-}
-
-.btn-download-hero:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.6);
-}
-
-.btn-download-hero:active {
-    transform: translateY(-2px);
-}
-
-.btn-download-hero svg {
-    width: 24px;
-    height: 24px;
-}
-
-.hero-preview {
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-}
-
-.preview-card {
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow-xl);
-    animation: float 3s ease-in-out infinite;
-    border: 1px solid var(--border);
-    backdrop-filter: blur(10px);
-}
-
-.preview-image {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-/* ==========================================
-   Buttons
-   ========================================== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn svg {
-    width: 20px;
-    height: 20px;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-xl);
-}
-
-.btn-primary:active {
-    transform: translateY(0);
-}
-
-.btn-secondary {
-    background-color: var(--bg-secondary);
-    color: var(--text);
-    border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-    background-color: var(--border);
-    transform: translateY(-2px);
-}
-
-.btn-large {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-}
-
-/* ==========================================
-   Features Section
-   ========================================== */
-.features {
-    padding: 120px 0;
-    background-color: var(--bg-secondary);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-}
-
-.section-header p {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.feature-card {
-    background-color: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
-    border-radius: 50%;
-    transition: var(--transition);
-}
-
-.feature-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-lg);
-}
-
-.feature-card:hover::before {
-    right: -30%;
-    top: -30%;
-}
-
-.feature-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    color: white;
-}
-
-.feature-icon:has(img) {
-    background: white;
-    border-radius: 12px;
-    padding: 6px;
-    box-sizing: border-box;
-}
-
-.feature-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-.feature-icon img {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-}
-
-.feature-image {
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
-    display: block;
-}
-
-.feature-card p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-/* ==========================================
-   Screenshots Section
-   ========================================== */
-.screenshots {
-    padding: 120px 0;
-    background-color: var(--bg-secondary);
-}
-
-.screenshots-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.screenshot-card {
-    background-color: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.screenshot-image {
-    width: 100%;
-    aspect-ratio: 3/2;
-    overflow: hidden;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    position: relative;
-}
-
-.screenshot-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.screenshot-card:hover .screenshot-image img {
-    transform: scale(1.1);
-}
-
-.screenshot-card h3 {
-    padding: 1.5rem;
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text);
-}
-
-.screenshot-card:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-8px);
-}
-
-/* ==========================================
-   Download Section - Enhanced
-   ========================================== */
-.download-section {
-    padding: 120px 0;
-    background: linear-gradient(135deg, var(--bg-secondary), var(--bg));
-}
-
-.download-card {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 80px 40px;
-    text-align: center;
-}
-
-.download-card .section-header {
-    margin-bottom: 3rem;
-}
-
-.download-info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 30px;
-    margin-bottom: 3rem;
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.info-icon {
-    font-size: 2.5rem;
-}
-
-.info-label {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-}
-
-.info-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text);
-}
-
-.btn-download-large {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 3.5rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    border-radius: 14px;
-    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4);
-    cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    margin: 0 auto;
-}
-
-.btn-download-large:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.6);
-}
-
-.btn-download-large:active {
-    transform: translateY(-2px);
-}
-
-.btn-download-large svg {
-    width: 28px;
-    height: 28px;
-}
-
-.download-note {
-    margin-top: 1.5rem;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-}
-
-/* ==========================================
-   Contact Section
-   ========================================== */
-.contact {
-    padding: 120px 0;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.contact-card {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2.5rem;
-    text-align: center;
-    transition: var(--transition);
-}
-
-.contact-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.contact-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: white;
-    font-size: 1.5rem;
-}
-
-.contact-icon svg {
-    width: 36px;
-    height: 36px;
-}
-
-.contact-image {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    margin:auto;
-    display: block;
-}
-
-.whatsapp-icon img {
-    background: transparent;
-}
-
-.email-icon,
-.whatsapp-icon {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    border-radius: 16px;
-}
-
-.email-icon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.whatsapp-icon {
-    background: linear-gradient(135deg, #10b981, #059669);
-}
-
-.email-icon {
-    background: transparent;
-    box-shadow: none;
-}
-
-.whatsapp-icon {
-    background: linear-gradient(135deg, #10b981, #059669);
-}
-
-.contact-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text);
-}
-
-.contact-link {
-    display: inline-block;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary);
-    transition: var(--transition);
-    text-decoration: none;
-}
-
-.contact-link:hover {
-    transform: translateX(5px);
-}
-
-/* ==========================================
-   Footer - Enhanced
-   ========================================== */
-.footer {
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border);
-    padding: 60px 0 30px;
-    margin-top: 120px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 1rem;
-}
-
-.footer-logo svg {
-    width: 24px;
-    height: 24px;
-    color: var(--primary);
-}
-
-.footer-section h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.footer-section p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.75rem;
-}
-
-.footer-section ul li a {
-    color: var(--text-secondary);
-    transition: var(--transition);
-}
-
-.footer-section ul li a:hover {
-    color: var(--primary);
-}
-
-.footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 30px;
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-}
-
-/* ==========================================
-   Modal
-   ========================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1998;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    z-index: 1999;
-    width: 90%;
-    max-width: 500px;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
-}
-
-.modal.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-content {
-    background-color: var(--bg);
-    border-radius: 12px;
-    padding: 40px;
-    position: relative;
-    box-shadow: var(--shadow-xl);
-    border: 1px solid var(--border);
-}
-
-.modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: var(--text-secondary);
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-close:hover {
-    color: var(--text);
-    transform: rotate(90deg);
-}
-
-.modal-content h2 {
-    margin-bottom: 2rem;
-}
-
-.download-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.download-option {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
-.download-option:hover {
-    background-color: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    transform: translateX(5px);
-}
-
-.download-option svg {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-}
-
-/* ==========================================
-   Responsive Design
-   ========================================== */
-@media (max-width: 768px) {
-    .hero-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .btn-download-hero {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .btn-download-large {
-        width: 100%;
-    }
-
-    .btn-nav-download {
-        display: none;
-    }
-
-    .features {
-        padding: 60px 0;
-    }
-
-    .section-header h2 {
-        font-size: 2rem;
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .screenshots-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .download-card {
-        padding: 40px 20px;
-    }
-
-    .download-info-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .nav-container {
-        padding: 0.75rem 20px;
-    }
-
-    .hero {
-        padding: 40px 0;
-        min-height: auto;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-
-    .hero-title {
-        font-size: 1.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 0.95rem;
-    }
-
-    .section-header h2 {
-        font-size: 1.5rem;
-    }
-
-    .section-header p {
-        font-size: 1rem;
-    }
-
-    .features-grid {
-        gap: 15px;
-    }
-
-    .feature-card {
-        padding: 1.5rem;
-    }
-
-    .feature-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    .feature-image {
-        width: 32px;
-        height: 32px;
-    }
-
-    .download-card {
-        padding: 30px 15px;
-    }
-
-    .download-info {
-        gap: 15px;
-    }
-
-    .hero-badge {
-        font-size: 0.75rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .btn {
-        padding: 0.625rem 1.25rem;
-        font-size: 0.9rem;
-    }
-
-    .btn-large {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-    }
-
-    .modal-content {
-        padding: 25px 20px;
-    }
-}
-
-/* ==========================================
-   Animations & Effects
-   ========================================== */
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
-
-/* Smooth scrolling for internal links */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Selection styles */
-::selection {
-    background-color: var(--primary);
-    color: white;
-}
-
-/* Scrollbar styles for webkit browsers */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
+        /* ==========================================
+           CSS Variables & Reset
+           ========================================== */
+        :root {
+            /* Palette */
+            --primary: #4f46e5;         /* Indigo 600 */
+            --primary-hover: #4338ca;   /* Indigo 700 */
+            --primary-light: #e0e7ff;   /* Indigo 100 */
+            --secondary: #7c3aed;       /* Purple 600 */
+            --accent: #f43f5e;          /* Rose 500 */
+            --success: #10b981;         /* Emerald 500 */
+            
+            /* Backgrounds & Text */
+            --bg: #ffffff;
+            --bg-secondary: #f8fafc;    /* Slate 50 */
+            --bg-tertiary: #f1f5f9;     /* Slate 100 */
+            --text: #0f172a;            /* Slate 900 */
+            --text-secondary: #475569;  /* Slate 600 */
+            --text-muted: #94a3b8;      /* Slate 400 */
+            --border: #e2e8f0;          /* Slate 200 */
+            --border-hover: #cbd5e1;    /* Slate 300 */
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-subtle: linear-gradient(135deg, rgba(79, 70, 229, 0.04), rgba(124, 58, 237, 0.04));
+            --gradient-glow: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(124, 58, 237, 0.15));
+            --gradient-light-bg: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(79, 70, 229, 0.08), 0 8px 10px -6px rgba(124, 58, 237, 0.08);
+            --shadow-premium: 0 25px 50px -12px rgba(79, 70, 229, 0.12);
+            
+            /* Transitions & Radius */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            background: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            position: relative;
+            padding: 120px 0;
+        }
+
+        /* ==========================================
+           Navigation
+           ========================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            transition: var(--transition);
+        }
+
+        .navbar-scrolled {
+            box-shadow: var(--shadow-md);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            position: relative;
+            padding: 4px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-nav-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-nav-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-nav-download svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Mobile Hamburger Icon (Optional) */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--text);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* ==========================================
+           Hero Section
+           ========================================== */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0 100px 0;
+            overflow: hidden;
+            background: var(--gradient-light-bg);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gradient-blur-1,
+        .gradient-blur-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.45;
+        }
+
+        .gradient-blur-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.3) 0%, rgba(124, 58, 237, 0.1) 70%);
+            top: -150px;
+            right: -100px;
+        }
+
+        .gradient-blur-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, rgba(244, 63, 94, 0.08) 70%);
+            bottom: -100px;
+            left: -150px;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--primary-light);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+            border: 1px solid rgba(79, 70, 229, 0.15);
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.05);
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            position: relative;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(244, 63, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5.5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero-title span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            line-height: 1.7;
+            max-width: 580px;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-download-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-download-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.45);
+        }
+
+        .btn-download-hero:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-download-hero svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .hero-cta-text {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            padding-left: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ==========================================
+           Features Section
+           ========================================== */
+        .features {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 72px auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .section-header h2 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .feature-card:hover {
+            border-color: transparent;
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+            transform: scale(1.05);
+        }
+
+        .feature-icon img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+
+
+        /* ==========================================
+           Download Section
+           ========================================== */
+        .download-section {
+            background: var(--gradient-light-bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .download-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 80px 48px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-card::after {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .download-card .section-header {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .btn-download-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 48px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-download-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.45);
+        }
+
+        .download-note {
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================
+           Contact Section
+           ========================================== */
+        .contact {
+            background-color: var(--bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary-hover);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            background-color: white;
+        }
+
+        .contact-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            background-color: #ffffff;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .contact-card:hover .contact-icon {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        .contact-card.whatsapp:hover .contact-icon {
+            border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+
+        .contact-icon img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .contact-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            max-width: 250px;
+        }
+
+        .contact-link {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-card.whatsapp .contact-link {
+            color: #059669;
+        }
+
+        .contact-link:hover {
+            transform: translateX(4px);
+        }
+
+        /* ==========================================
+           Footer
+           ========================================== */
+        .footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 80px 0 40px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 16px;
+            max-width: 320px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 32px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           Modal for Download Instructions
+           ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -46%) scale(0.96);
+            z-index: 1999;
+            width: 92%;
+            max-width: 580px;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-content {
+            background-color: var(--bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            position: relative;
+            box-shadow: var(--shadow-premium);
+            border: 1px solid var(--border);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            background: var(--bg-tertiary);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-header a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .guide-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-text h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .step-text p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* SmartScreen Visual Aid */
+        .smartscreen-card {
+            margin-top: 12px;
+            background-color: #f1f5f9;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid #0284c7; /* Sky blue */
+            padding: 12px 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .smartscreen-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0369a1;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .smartscreen-header svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .smartscreen-body {
+            font-size: 0.8rem;
+            color: #334155;
+            line-height: 1.4;
+        }
+
+        .smartscreen-actions {
+            margin-top: 8px;
+        }
+
+        .smartscreen-more-info {
+            color: #0284c7;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           Responsive Design
+           ========================================== */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .hero-content {
+                align-items: center;
+            }
+
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-cta-text {
+                justify-content: center;
+            }
+
+            .preview-card {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+
+            .nav-links {
+                display: none; /* Hide main links on mobile */
+            }
+
+            .download-info-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .download-card {
+                padding: 48px 24px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
     </style>
 </head>
 <body>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="9" y1="9" x2="15" y2="9"></line>
                     <line x1="9" y1="15" x2="15" y2="15"></line>
                 </svg>
                 <span>RetailHub</span>
             </div>
+            
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#contact">Support</a></li>
+            </ul>
+
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
                 <button class="btn-nav-download" id="navDownloadBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
-                    Download App
+                    <span>Download App</span>
                 </button>
             </div>
         </div>
@@ -1197,209 +1085,201 @@ html {
         <div class="container hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <span>⭐ Version 1.1.0</span>
                     <span class="dot"></span>
-                    <span>Now Available</span>
+                    <span>Version 1.1.9 Live</span>
                 </div>
-                <h1 class="hero-title">Complete Retail<br>Management Software</h1>
+                <h1 class="hero-title">Complete <span>Retail Management</span> Software</h1>
                 <p class="hero-subtitle">Inventory, Billing, Reports, Google Drive Backup and Auto Sync — everything your retail business needs in one powerful application.</p>
-                <button class="btn-download-hero" id="downloadBtnHero">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download RetailHub v1.1.0
-                </button>
-                <p class="hero-cta-text">Free • Windows • Install in 2 minutes</p>
-            </div>
-            <div class="hero-preview">
-                <div class="preview-card">
-                    <img src="assets/dashboard.png" alt="RetailHub Dashboard" class="preview-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23667eea;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23764ba2;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22600%22 fill=%22url(%23grad)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2248%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ERetailHub Dashboard%3C/text%3E%3C/svg%3E'">
+                <div class="hero-cta">
+                    <button class="btn-download-hero" id="downloadBtnHero">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>Download RetailHub v1.1.9</span>
+                    </button>
+                    <div class="hero-cta-text">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <path d="M12 8v8M8 12h8"></path>
+                        </svg>
+                        <span>Free • Windows • Install in 2 mins</span>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>Powerful Features</h2>
+                <h2>Powerful <span>Features</span></h2>
                 <p>Everything you need to manage your retail business efficiently</p>
             </div>
+            
             <div class="features-grid">
+                
+                <!-- Feature 1 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/Billing.png" alt="Billing" class="feature-image">
+                        <img src="assets/Billing.png" alt="Billing">
                     </div>
                     <h3>Billing</h3>
                     <p>Create invoices, manage payments, and track transactions with ease</p>
                 </div>
 
+                <!-- Feature 2 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/inventory.png" alt="Inventory Management" class="feature-image">
+                        <img src="assets/inventory.png" alt="Inventory Management">
                     </div>
                     <h3>Inventory Management</h3>
                     <p>Track stock levels, manage SKUs, and optimize inventory in real-time</p>
                 </div>
 
+                <!-- Feature 3 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/Stock in out.png" alt="Stock In/Out" class="feature-image">
+                        <img src="assets/Stock in out.png" alt="Stock In/Out">
                     </div>
                     <h3>Stock In/Out</h3>
                     <p>Manage inbound and outbound stock movements seamlessly</p>
                 </div>
 
+                <!-- Feature 4 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/Expenses.png" alt="Expenses" class="feature-image">
+                        <img src="assets/Expenses.png" alt="Expenses">
                     </div>
                     <h3>Expenses</h3>
                     <p>Track and categorize all business expenses with detailed reports</p>
                 </div>
 
+                <!-- Feature 5 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/Reports.png" alt="Reports" class="feature-image">
+                        <img src="assets/Reports.png" alt="Reports">
                     </div>
                     <h3>Reports</h3>
                     <p>Generate comprehensive reports to analyze business performance</p>
                 </div>
 
+                <!-- Feature 6 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/Google_Drive.png" alt="Google Drive Backup" class="feature-image">
+                        <img src="assets/Google_Drive.png" alt="Google Drive Backup">
                     </div>
                     <h3>Google Drive Backup</h3>
                     <p>Automatic backups to Google Drive for data safety and accessibility</p>
                 </div>
 
+                <!-- Feature 7 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/backup.png" alt="Auto Backup" class="feature-image">
+                        <img src="assets/backup.png" alt="Auto Backup">
                     </div>
                     <h3>Auto Backup</h3>
                     <p>Never lose data with automatic local and cloud backups</p>
                 </div>
 
+                <!-- Feature 8 -->
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <img src="assets/updated.png" alt="Auto Updates" class="feature-image">
+                        <img src="assets/updated.png" alt="Auto Updates">
                     </div>
                     <h3>Auto Updates</h3>
                     <p>Stay up-to-date with automatic software updates and improvements</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Product Screenshots Section -->
-    <section class="screenshots">
-        <div class="container">
-            <div class="section-header">
-                <h2>Product Screenshots</h2>
-                <p>See what's inside RetailHub</p>
-            </div>
-            <div class="screenshots-grid">
-                <div class="screenshot-card">
-                    <div class="screenshot-image">
-                        <img src="assets/dashboard.png" alt="Dashboard" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g1%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23667eea;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23764ba2;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g1)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EDashboard%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <h3>Dashboard</h3>
-                </div>
-                <div class="screenshot-card">
-                    <div class="screenshot-image">
-                        <img src="assets/billing.png" alt="Billing" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g2%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%2385a5ff;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%237c3aed;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g2)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBilling%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <h3>Billing</h3>
-                </div>
-                <div class="screenshot-card">
-                    <div class="screenshot-image">
-                        <img src="assets/inventory.png" alt="Inventory" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g3%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%2306b6d4;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%233b82f6;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g3)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EInventory%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <h3>Inventory</h3>
-                </div>
-                <div class="screenshot-card">
-                    <div class="screenshot-image">
-                        <img src="assets/reports.png" alt="Reports" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g4%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%2310b981;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%2306b6d4;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g4)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3EReports%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <h3>Reports</h3>
-                </div>
-                <div class="screenshot-card">
-                    <div class="screenshot-image">
-                        <img src="assets/settings.png" alt="Settings" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22%3E%3Cdefs%3E%3ClinearGradient id=%22g5%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%23f59e0b;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23ff6b6b;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22600%22 height=%22400%22 fill=%22url(%23g5)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2236%22 fill=%22white%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESettings%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <h3>Settings</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Download Section -->
-    <section class="download-section">
+    <section class="download-section" id="download">
         <div class="container">
             <div class="download-card">
                 <div class="section-header">
-                    <h2>Download RetailHub</h2>
-                    <p>Get started in minutes</p>
+                    <h2>Get Started with <span>RetailHub</span></h2>
+                    <p>Upgrade your retail operations in less than 5 minutes</p>
                 </div>
+                
                 <div class="download-info-grid">
                     <div class="info-item">
-                        <div class="info-icon">📦</div>
-                        <span class="info-label">Current Version</span>
-                        <span class="info-value">1.1.0</span>
+                        <span class="info-icon">📦</span>
+                        <span class="info-label">CURRENT VERSION</span>
+                        <span class="info-value">1.1.9</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-icon">💻</div>
-                        <span class="info-label">Platform</span>
+                        <span class="info-icon">💻</span>
+                        <span class="info-label">PLATFORM SUPPORT</span>
                         <span class="info-value">Windows</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-icon">💰</div>
-                        <span class="info-label">Cost</span>
+                        <span class="info-icon">💎</span>
+                        <span class="info-label">LICENSING</span>
                         <span class="info-value">Free</span>
                     </div>
                 </div>
+
                 <button class="btn-download-large" id="downloadBtnLarge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
-                    Download RetailHub v1.1.0
+                    <span>Download RetailHub v1.1.9</span>
                 </button>
-                <p class="download-note">✓ Free • ✓ Windows 7+ • ✓ Install in 2 minutes</p>
+                <p class="download-note">✓ Offline installer • ✓ Compatible with Windows 7, 8, 10, 11 • ✓ Lightweight setup</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact">
+    <section class="contact" id="contact">
         <div class="container">
             <div class="section-header">
-                <h2>Get in Touch</h2>
-                <p>We're here to help you succeed</p>
+                <h2>Get in <span>Touch</span></h2>
+                <p>We're here to help you get the most out of RetailHub</p>
             </div>
-            <div class="contact-card">
-
-                <div class="contain-icon email-icon">
-                    <img src="assets/mail.png" alt="Email" class="contact-image">
+            
+            <div class="contact-grid">
+                
+                <!-- Email Card -->
+                <div class="contact-card email">
+                    <div class="contact-icon">
+                        <img src="assets/mail.png" alt="Email">
                     </div>
-
-                    <h3>Email</h3>
-                    <a href="mailto:codeflare22@gmail.com" class="contact-link">codeflare22@gmail.com
+                    <h3>Email Support</h3>
+                    <p>Have general inquiries or feature requests?</p>
+                    <a href="mailto:codeflare22@gmail.com" class="contact-link">
+                        <span>codeflare22@gmail.com</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
                     </a>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon whatsapp-icon">
-                        <img src="assets/whatsapp.png" alt="WhatsApp" class="contact-image">
+
+                <!-- WhatsApp Card -->
+                <div class="contact-card whatsapp">
+                    <div class="contact-icon">
+                        <img src="assets/whatsapp.png" alt="WhatsApp">
                     </div>
-                    <h3>WhatsApp</h3>
-                    <a href="https://wa.me/919592990709" class="contact-link" target="_blank" rel="noopener noreferrer">+91 9592990709</a>
+                    <h3>WhatsApp Support</h3>
+                    <p>Instant messages regarding setups or licensing issues</p>
+                    <a href="https://wa.me/919592990709" class="contact-link" target="_blank" rel="noopener noreferrer">
+                        <span>+91 9592990709</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
@@ -1410,258 +1290,175 @@ html {
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <line x1="9" y1="9" x2="15" y2="9"></line>
                             <line x1="9" y1="15" x2="15" y2="15"></line>
                         </svg>
                         <span>RetailHub</span>
                     </div>
-                    <p>Complete retail management solution for modern businesses</p>
+                    <p>Complete retail management software designed to optimize your stock logs, cashier transactions, billing audits, and analytics exports.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Product</h4>
+                    <h4>Product Navigation</h4>
                     <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#screenshots">Screenshots</a></li>
-                        <li><a href="#download">Download</a></li>
+                        <li><a href="#features">Key Features</a></li>
+                        <li><a href="#download">Download App</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Support</h4>
+                    <h4>Help & Support</h4>
                     <ul>
-                        <li><a href="mailto:codeflare22@gmail.com">Email</a></li>
-                        <li><a href="https://wa.me/919592990709" target="_blank">WhatsApp</a></li>
+                        <li><a href="mailto:codeflare22@gmail.com">Send Email</a></li>
+                        <li><a href="https://wa.me/919592990709" target="_blank">Chat on WhatsApp</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 RetailHub. All Rights Reserved.</p>
+                <p>Designed for Windows 7 / 8 / 10 / 11</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modal for Download -->
+    <!-- Modal for Download Guidance -->
     <div class="modal" id="downloadModal">
         <div class="modal-content">
-            <button class="modal-close" id="modalClose">×</button>
-            <h2>Download RetailHub</h2>
-            <div class="download-options">
-                <a href="https://github.com/codeflare-07/retailhub-App/releases/download/v1.1.7/RetailHub.Setup.1.1.7.exe"
-                   class="download-option"
-                     target="_blank">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <h2>Thank you for choosing RetailHub!</h2>
+                <p>Your download should start in a moment. If it doesn't, <a href="https://github.com/codeflare-07/retailhub-App/releases/download/v1.1.9/RetailHub-Setup-1.1.9.exe" id="directDownloadLink">click here to retry</a>.</p>
+            </div>
+            
+            <div class="guide-steps">
+                <div class="guide-step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <h4>Open the Installer</h4>
+                        <p>Locate the downloaded <strong>RetailHub-Setup-1.1.9.exe</strong> file in your downloads folder and double-click to open it.</p>
+                    </div>
+                </div>
 
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <polyline points="23 6 13.5 15.5 8 10 1 17"></polyline>
-        <polyline points="17 6 23 6 23 12"></polyline>
-                </svg>
-                     <span>Direct Download (v1.1.7)</span>
-                 </a>
+                <div class="guide-step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <h4>Bypass Windows Protection (if prompted)</h4>
+                        <p>As this is a new custom software build, Windows Defender SmartScreen might alert you. Click <strong>"More info"</strong> and then click the <strong>"Run anyway"</strong> button to begin installation.</p>
+                        
+                        <!-- Visual Mock of SmartScreen -->
+                        <div class="smartscreen-card">
+                            <div class="smartscreen-header">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+                                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                <span>Windows protected your PC</span>
+                            </div>
+                            <div class="smartscreen-body">
+                                <p>Windows Defender SmartScreen prevented an unrecognized app from starting...</p>
+                                <div class="smartscreen-actions">
+                                    <span class="smartscreen-more-info">More info</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <h4>Complete Installation</h4>
+                        <p>Follow the installer instructions. It takes less than 30 seconds, and the app will launch automatically.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="modal-overlay" id="modalOverlay"></div>
 
     <script>
-// ==========================================
-// Theme Management
-// ==========================================
-
-const html = document.documentElement;
-const themeToggle = document.getElementById('themeToggle');
-
-// Initialize theme
-function initializeTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (prefersDark) {
-        setTheme('dark');
-    } else {
-        setTheme('light');
-    }
-}
-
-function setTheme(theme) {
-    if (theme === 'dark') {
-        html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-    }
-}
-
-function toggleTheme() {
-    const isDark = html.classList.contains('dark');
-    setTheme(isDark ? 'light' : 'dark');
-}
-
-themeToggle.addEventListener('click', toggleTheme);
-
-// Listen for system theme changes
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-    }
-});
-
-// ==========================================
-// Gallery/Carousel - REMOVED (no longer needed)
-// ==========================================
-// Gallery functionality has been replaced with screenshot cards
-
-// ==========================================
-// Download Button Handlers
-// ==========================================
-
-const downloadBtnHero = document.getElementById('downloadBtnHero');
-const navDownloadBtn = document.getElementById('navDownloadBtn');
-const downloadBtnLarge = document.getElementById('downloadBtnLarge');
-
-const downloadButtons = [downloadBtnHero, navDownloadBtn, downloadBtnLarge].filter(btn => btn !== null);
-
-function handleDownloadClick() {
-    // Check if there's a direct download URL set
-    const downloadUrl = localStorage.getItem('downloadUrl') || null;
-    
-    if (downloadUrl) {
-        // If a download URL is configured, trigger direct download
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = 'RetailHub-v1.1.0.exe';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else {
-        // Otherwise open download modal
-        openModal();
-    }
-}
-
-downloadButtons.forEach(btn => {
-    if (btn) {
-        btn.addEventListener('click', handleDownloadClick);
-    }
-});
-
-// ==========================================
-// Modal Management
-// ==========================================
-
-const modal = document.getElementById('downloadModal');
-const modalOverlay = document.getElementById('modalOverlay');
-const modalClose = document.getElementById('modalClose');
-
-function openModal() {
-    modal.classList.add('active');
-    modalOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    modal.classList.remove('active');
-    modalOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-if (modalClose) {
-    modalClose.addEventListener('click', closeModal);
-}
-
-if (modalOverlay) {
-    modalOverlay.addEventListener('click', closeModal);
-}
-
-// Close modal on Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeModal();
-    }
-});
-
-// ==========================================
-// Smooth Scroll Navigation
-// ==========================================
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        
-        if (href.startsWith('#') && href !== '#') {
-            e.preventDefault();
-            
-            const target = document.querySelector(href);
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+        // ==========================================
+        // Sticky Navbar Effect
+        // ==========================================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
             }
+        });
+
+
+
+        // ==========================================
+        // Download Triggering & Modal Management
+        // ==========================================
+        const downloadModal = document.getElementById('downloadModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+        
+        const downloadBtnHero = document.getElementById('downloadBtnHero');
+        const navDownloadBtn = document.getElementById('navDownloadBtn');
+        const downloadBtnLarge = document.getElementById('downloadBtnLarge');
+        const directDownloadLink = document.getElementById('directDownloadLink');
+
+        const DOWNLOAD_URL = "https://github.com/codeflare-07/retailhub-App/releases/download/v1.1.9/RetailHub-Setup-1.1.9.exe";
+
+        function openModal() {
+            downloadModal.classList.add('active');
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-    });
-});
 
-// ==========================================
-// Intersection Observer for Animations
-// ==========================================
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-            observer.unobserve(entry.target);
+        function closeModal() {
+            downloadModal.classList.remove('active');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
-    });
-}, observerOptions);
 
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.style.opacity = '0';
-    observer.observe(card);
-});
+        function triggerDownload() {
+            // Trigger direct download via hidden link click
+            const anchor = document.createElement('a');
+            anchor.href = DOWNLOAD_URL;
+            anchor.setAttribute('download', 'RetailHub-Setup-1.1.9.exe');
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        }
 
-// Add IDs to sections
-document.querySelector('.features').id = 'features';
-document.querySelector('.screenshots').id = 'screenshots';
-document.querySelector('.download-section').id = 'download';
-document.querySelector('.contact').id = 'contact';
+        function handleDownloadFlow(e) {
+            if (e) e.preventDefault();
+            // Open modal to show steps
+            openModal();
+            // Start download after 300ms delay for visual feedback
+            setTimeout(triggerDownload, 350);
+        }
 
-// Navbar scroll effect
-const navbar = document.querySelector('.navbar');
+        // Attach listeners
+        if (downloadBtnHero) downloadBtnHero.addEventListener('click', handleDownloadFlow);
+        if (navDownloadBtn) navDownloadBtn.addEventListener('click', handleDownloadFlow);
+        if (downloadBtnLarge) downloadBtnLarge.addEventListener('click', handleDownloadFlow);
+        if (directDownloadLink) directDownloadLink.addEventListener('click', (e) => {
+            // Direct download link inside modal is standard link, but let's double check trigger
+            triggerDownload();
+        });
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.style.boxShadow = 'var(--shadow-md)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-});
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 
-// Download functionality
-const downloadLink = document.querySelector('.download-option');
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
-if (downloadLink) {
-    downloadLink.addEventListener('click', () => {
-        setTimeout(closeModal, 1000);
-    });
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    initializeTheme();
-    console.log('RetailHub Landing Page loaded successfully');
-});
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('RetailHub Premium Landing Page loaded successfully');
+        });
     </script>
 </body>
 </html>
