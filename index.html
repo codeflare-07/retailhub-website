@@ -301,14 +301,21 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: var(--primary-light);
+            background: linear-gradient(rgba(79, 70, 229, 0.03), rgba(79, 70, 229, 0.03)) padding-box,
+                        var(--gradient-primary) border-box;
+            border: 1.5px solid transparent;
             border-radius: 100px;
             font-size: 0.85rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 24px;
-            border: 1px solid rgba(79, 70, 229, 0.15);
-            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.05);
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.08);
+            animation: borderPulse 4s ease infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { border-color: rgba(79, 70, 229, 0.15); }
+            50% { border-color: rgba(244, 63, 94, 0.3); }
         }
 
         .hero-badge .dot {
@@ -336,7 +343,7 @@
         }
 
         .hero-title span {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 55%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -371,6 +378,28 @@
             box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
             cursor: pointer;
             transition: var(--transition);
+            position: relative;
+            overflow: visible;
+        }
+
+        .btn-download-hero::after,
+        .btn-download-large::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+            animation: pulseWave 2.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulseWave {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
         }
 
         .btn-download-hero:hover {
@@ -612,6 +641,7 @@
             transition: var(--transition);
             position: relative;
             z-index: 1;
+            overflow: visible;
         }
 
         .btn-download-large:hover {
@@ -1041,6 +1071,270 @@
                 gap: 16px;
             }
         }
+
+        /* Ambient Glow Blobs Continued */
+        .gradient-blur-3,
+        .gradient-blur-4 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .gradient-blur-3 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            top: 40%;
+            left: -100px;
+            z-index: 0;
+        }
+
+        .gradient-blur-4 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+            bottom: 20%;
+            right: -100px;
+            z-index: 0;
+        }
+
+        /* Testimonials Styles */
+        .testimonials {
+            background-color: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--primary-light);
+            background-color: white;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .rating {
+            color: #fbbf24;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-user h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .testimonial-user span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* FAQ Section Styles */
+        .faq {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faq-item {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item[open] {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            padding: 24px;
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            transition: var(--transition);
+        }
+
+        .faq-question::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+            background-color: var(--bg-secondary);
+        }
+
+        .faq-icon-arrow {
+            width: 18px;
+            height: 18px;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .faq-item[open] .faq-icon-arrow {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px 24px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-top: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .faq-item[open] .faq-answer {
+            border-color: var(--border);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* High-fidelity Windows Defender SmartScreen Mockup */
+        .smartscreen-card {
+            margin-top: 16px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #005a9e; /* Microsoft blue */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            overflow: hidden;
+            width: 100%;
+            max-width: 460px;
+            text-align: left;
+        }
+
+        .smartscreen-title-bar {
+            background-color: #005a9e;
+            color: #ffffff;
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .smartscreen-close-btn {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            cursor: default;
+        }
+
+        .smartscreen-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #005a9e;
+            font-weight: 400;
+            font-size: 1.15rem;
+            padding: 20px 20px 10px 20px;
+        }
+
+        .smartscreen-header svg {
+            width: 22px;
+            height: 22px;
+            stroke: #005a9e;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .smartscreen-body {
+            font-size: 0.82rem;
+            color: #333333;
+            line-height: 1.4;
+            padding: 0 20px 20px 20px;
+        }
+
+        .smartscreen-body p {
+            margin-bottom: 12px;
+        }
+
+        .smartscreen-actions {
+            margin-top: 12px;
+        }
+
+        .smartscreen-more-info {
+            color: #005a9e;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
@@ -1059,7 +1353,8 @@
             
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#download">Download</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Support</a></li>
             </ul>
 
@@ -1200,6 +1495,103 @@
 
 
 
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Loved by <span>Retailers</span></h2>
+                <p>See what shop owners are saying about RetailHub</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Billing used to take us hours at the end of the day. With RetailHub, cashier checkout is instant, and my stock updates automatically. I love it!"</p>
+                    <div class="testimonial-user">
+                        <div class="user-avatar" style="background-color: var(--primary-light); color: var(--primary);">AR</div>
+                        <div>
+                            <h4>Amit Sharma</h4>
+                            <span>General Store Owner</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The Google Drive backup is a lifesaver. I had my checkout PC crash last week, but I installed RetailHub on a new PC, synced with Google Drive, and got all data back in minutes!"</p>
+                    <div class="testimonial-user">
+                        <div class="user-avatar" style="background-color: #d1fae5; color: #065f46;">KS</div>
+                        <div>
+                            <h4>Karan Singh</h4>
+                            <span>Pharmacy Cashier Manager</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"It's completely free and works offline, which is perfect for my grocery stall where internet is patchy. Simple, clean, and extremely fast."</p>
+                    <div class="testimonial-user">
+                        <div class="user-avatar" style="background-color: #fee2e2; color: #991b1b;">PR</div>
+                        <div>
+                            <h4>Pooja Rao</h4>
+                            <span>Fruit & Veg Stall</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Got questions? We've got answers.</p>
+            </div>
+            
+            <div class="faq-accordion">
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Is RetailHub really free?</span>
+                        <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Yes, RetailHub is 100% free with no monthly fees, no licensing costs, and no hidden features. It runs as a local offline application on your Windows machine.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Does it work without an internet connection?</span>
+                        <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Absolutely! RetailHub is designed to be offline-first. Your inventory logs, billing registries, and receipts are stored locally on your PC. You only need the internet if you want to sync your data backups to Google Drive or check for updates.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>How does the Google Drive auto-backup work?</span>
+                        <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>In the application settings, you can authenticate your Google Account. RetailHub will then create a private, encrypted database folder in your personal Google Drive and automatically sync local data to the cloud when an internet connection is available, keeping your data safe from PC failures.</p>
+                    </div>
+                </details>
+                
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>How do auto-updates work in v1.1.9?</span>
+                        <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Starting with version 1.1.9, RetailHub checks for updates automatically on startup. When a new stable version is available, it notifies you and lets you update instantly with a single click, keeping your security patches and features up-to-date.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
     <!-- Download Section -->
     <section class="download-section" id="download">
         <div class="container">
@@ -1303,6 +1695,8 @@
                     <h4>Product Navigation</h4>
                     <ul>
                         <li><a href="#features">Key Features</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#faq">FAQs</a></li>
                         <li><a href="#download">Download App</a></li>
                     </ul>
                 </div>
@@ -1347,8 +1741,12 @@
                         
                         <!-- Visual Mock of SmartScreen -->
                         <div class="smartscreen-card">
+                            <div class="smartscreen-title-bar">
+                                <span>Windows Defender SmartScreen</span>
+                                <span class="smartscreen-close-btn">✕</span>
+                            </div>
                             <div class="smartscreen-header">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
                                     <line x1="12" y1="9" x2="12" y2="13"></line>
                                     <line x1="12" y1="17" x2="12.01" y2="17"></line>
@@ -1356,7 +1754,7 @@
                                 <span>Windows protected your PC</span>
                             </div>
                             <div class="smartscreen-body">
-                                <p>Windows Defender SmartScreen prevented an unrecognized app from starting...</p>
+                                <p>Windows Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
                                 <div class="smartscreen-actions">
                                     <span class="smartscreen-more-info">More info</span>
                                 </div>
